@@ -1,0 +1,20 @@
+<? session_start();if($_GET['continue']==null){$continue="http://nokedo.com";}else{$continue=$_GET['continue'];}
+require_once('core/tb.php');include('../../config.php');
+$CONSUMER_KEY='3KXExR1MHtkmQLEGt58XznRxaANZNACQAoYTunnHf7bTWUMrIk';$CONSUMER_SECRET='TfsFOfv7NwuBuGIoZwQA1BVbrYECshlhZJ25aEJHQHE1BWn9y3';$OAUTH_CALLBACK='http://nokedo.com/accounts/social/tumblr.php';
+if($_GET['oauth_token']=='' || $_GET['oauth_verifier']==''){
+$_SESSION['return_url']=$continue;
+$connection = new TumblrOAuth($CONSUMER_KEY, $CONSUMER_SECRET);
+$temporary_credentials = $connection->getRequestToken($OAUTH_CALLBACK);
+$_SESSION['oauth_token']=$temporary_credentials['oauth_token'];$_SESSION['oauth_token_secret']=$temporary_credentials['oauth_token_secret'];
+$redirect_url = $connection->getAuthorizeURL($temporary_credentials); // Use Sign in with Twitter
+$redirect_url = $connection->getAuthorizeURL($temporary_credentials, FALSE);
+header("Location:$redirect_url");
+}
+if($_GET['oauth_token']!='' && $_GET['oauth_verifier']!=''){
+$connection = new TumblrOAuth($CONSUMER_KEY, $CONSUMER_SECRET, $_SESSION['oauth_token'],$_SESSION['oauth_token_secret']);
+$token_credentials = $connection->getAccessToken($_REQUEST['oauth_verifier']);
+$ui=$connection->get('http://api.tumblr.com/v2/user/info');$ui=(array) $ui;$ui=(array)$ui['response'];$ui=(array)$ui['user'];$ui=$ui['name'];
+save('tbat',$token_credentials['oauth_token']);save('tbats',$token_credentials['oauth_token_secret']);save('tbu',$ui);
+header("Location:".$_SESSION['return_url']);
+}
+?>

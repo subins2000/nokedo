@@ -1,0 +1,329 @@
+body{
+ font-family:"Ubuntu";
+ background-color:#93dc58;
+ margin: 0px;
+ padding: 0px;
+ border: 0px;
+ line-height: 18px;
+}
+#content{
+ margin: 0% auto 1% auto;
+ width: auto;
+ position: relative;
+ padding: 4% 14px 15px 14px;
+ width: 700px;
+ line-height: 18px;
+ background:#EEE !important;
+ -moz-background-clip: padding;
+ -webkit-background-clip: padding;
+ background-clip: padding-box;
+ -moz-box-shadow: 0 4px 4px #666;
+ -webkit-box-shadow: 0 4px 4px rgb(102, 102, 102);
+ box-shadow: 0 4px 4px rgb(102, 102, 102);
+ border-bottom-left-radius:10px;
+ border-bottom-right-radius:10px;
+ font-size: 14px;
+}
+#ncontent{
+ margin: 4% auto 1% auto;
+ max-width:60%;
+}
+[clear]{
+ margin-top:5px;
+}
+a:link{
+ text-decoration:none;
+ color:#00E;
+}
+a:visited{
+ text-decoration:none;
+ color:#00D;
+}
+.top{
+ padding-top: 3.5px;
+ background:black;
+ height: 38px;
+ position:fixed;
+ left:0px;
+ right:0px;
+ top:0px;
+ -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
+ box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
+ z-index:5;
+}
+.top mn{
+ display: inline-block;
+ margin-left:100px;
+ margin-top: 2px;
+}
+.top .ser{
+ text-decoration:none;
+ border-radius:5px;
+ padding: 5px 17px;
+ cursor:pointer;
+ margin-left: 10px;
+ color:rgba(255,255,255,.8);
+ display: inline-block;
+}
+.top .ser:hover{
+ color:rgba(255,255,255,1);
+}
+.top shn{
+ margin-right:100px;
+ display:inline-block;
+ float: right;
+ margin-top: -2px;
+}
+.sprofile{
+ padding: 0px 13px;
+ height:150px;
+ width:270px;
+ background:white;
+ border:1px solid black;
+ position:fixed;
+ right:100px;
+ top:45px;
+ border-radius:.6em;
+ box-shadow: 0px 7px 60px -6px black;
+ display:none;
+ z-index:10;
+}
+.sprofile button{
+ margin: 2px;
+}
+.sprofile-l{
+ height: 75%;
+ float: left;
+}
+.sprofile-b{
+ background: whiteSmoke;
+ height: 35px;
+ bottom: 0px;
+ position: absolute;
+ width: 100%;
+ left: 0px;
+ border-bottom-left-radius: .6em;
+ border-bottom-right-radius: .6em;
+ border-top: 2px solid rgb(204, 204, 204);
+ padding-top:1px;
+}
+.sprofile-r{
+ margin-top: 10px;
+ float: right;
+ position:relative;
+}
+#chimg{
+ position:absolute;
+ top:0px;
+ left:0px;
+ right:0px;
+ background:black;
+ color:white;
+ text-align:center;
+ font-size:12px;
+ font-weight: bold;
+ cursor:pointer;
+}
+.overlay{
+ text-align: center;
+ display: table;
+ margin: 0px auto;
+ background: white;
+ padding: 16px;
+ min-width: 50%;
+ border: 25px solid rgba(0, 0, 0, .5);
+ border-radius: 20px;
+ margin-top: -100px;
+ position: relative;
+ display:none;
+ z-index:10;
+}
+[hide]{
+ display:none;
+}
+/*Scroll Bars*/
+::-webkit-scrollbar-thumb{
+ background-color: rgba(0, 0, 0, .2);
+ background-clip: padding-box;
+ border: solid transparent;
+ min-height: 28px;
+ padding: 100px 0 0;
+ box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1),inset 0 -1px 0 rgba(0, 0, 0, .07);
+}
+::-webkit-scrollbar-thumb:hover{
+ background-color: rgba(0, 0, 0, .5);
+}
+::-webkit-scrollbar{
+ width: 15px;
+ border-width: 0 1px 0 2px;
+}
+::-webkit-scrollbar-track{
+ background-clip: padding-box;
+ border: solid transparent;
+ border-width: 0 0 0 4px;
+ border-width: 0;
+}
+::-webkit-scrollbar-corner {
+ background: transparent;
+}
+/*Appearcance*/
+blockquote{
+ border:3px dashed rgba(0,0,0,.8);
+ padding:12px 10px;
+ margin-left: 20px;
+ border-size:1;
+ border-radius:10px;
+}
+input[type=text],input[type=number],textarea,input[type=password]{
+ font-family: Ubuntu;
+ vertical-align: top;
+ border:1px solid rgba(204, 204, 204,.7);
+ background:rgba(255, 255, 255,.7);
+ border-radius:.4em;
+ min-height:15px;
+ min-width: 235px;
+ text-shadow: 0 1px 0 rgb(240, 240, 240);
+ box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.08),inset 0 1px 2px rgba(255, 255, 255, 0.75);
+ display: table-cell;
+ outline: none;
+ padding: 5px 10px;
+}
+input[type=text]:hover,input[type=number]:hover,textarea:hover,input[type=password]:hover{
+ border:1px solid rgba(204, 204, 204,1);
+ background: rgba(255, 255, 255,.8);
+ box-shadow: inset 0 .5px 1px rgba(0,0,0,0.1);
+}
+input[type=text]:active,input[type=number]:active,textarea:active,input[type=password]:active{
+ border:1px solid rgba(204, 204, 204,1);
+ background: rgba(255, 255, 255,1);
+}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,input[type=password]:focus{
+ border:1px solid rgb(77, 137, 254);
+ background: rgba(255, 255, 255,1);
+}
+input[type=button],input[type=submit],button,.sb,select{
+ margin: 5px;
+ text-align: center;
+ font-size: 13px;
+ cursor:pointer;
+ font-weight:bold;
+ font-family:arial;
+ padding:0px 8px;
+ line-height:27px;
+ border-radius:.2em;
+ vertical-align: middle;
+ border: 1px solid rgba(204, 204, 204,.7);
+ background: rgb(245, 245, 245);
+ display:table-cell;
+}
+input[type=button]:hover,input[type=submit]:hover,button:hover,.sb:hover,select:hover{
+ border:1px solid rgba(204, 204, 204,.9);
+ background: rgb(255, 255, 255);
+ box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
+}
+input[type=button]:active,input[type=submit]:active,button:active,.sb:active,select:active{
+ border:1px solid rgba(204, 204, 204,1);
+ background: rgb(255, 255, 255);
+ box-shadow: inset 0 4px 2px rgba(0,0,0,0.1);
+}
+input[type=button]:focus,input[type=submit]:focus,button:focus,.sb:focus,select:focus{
+ outline:none;
+}
+select{
+ display:inline-block;
+ padding:5px 8px;
+}
+.sb-b,input[type=button],input[type=submit]{
+ color: white !important;
+ border: 1px solid rgb(48, 121, 237) !important;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.1) !important;
+ background-color: rgb(77, 144, 254) !important;
+ background-image: -webkit-gradient(linear,left top,left bottom,from(rgb(77, 144, 254)),to(rgb(71, 135, 237))) !important;
+ background-image: -webkit-linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
+ background-image: -moz-linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
+ background-image: -ms-linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
+ background-image: -o-linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
+ background-image: linear-gradient(top,rgb(77, 144, 254),rgb(71, 135, 237)) !important;
+}
+.sb-red{
+ border: 1px solid rgba(176, 40, 26,.9) !important;
+ border-image: initial !important;
+ color: white !important;
+ text-shadow: rgba(0, 0, 0, 0.298039) 0px 1px !important;
+ background:rgba(221,75, 57,.9) !important;
+}
+.sb-red:hover{
+ background:rgba(221,75, 57,1);
+ border: 1px solid rgba(176, 40, 26,1);
+}
+.sb-g{
+ border: 1px solid rgba(0,0,0,.2);
+ background-color: #3D9400 !important;
+ background-image: -webkit-gradient(linear,left top,left bottom,from(#3D9400),to(#398A00)) !important;
+ background-image: -webkit-linear-gradient(top,#3D9400,#398A00) !important;
+ background-image: -moz-linear-gradient(top,#3D9400,#398A00) !important;
+ background-image: -ms-linear-gradient(top,#3D9400,#398A00) !important;
+ background-image: -o-linear-gradient(top,#3D9400,#398A00) !important;
+ background-image: linear-gradient(top,#3D9400,#398A00) !important;
+ color: white !important;
+}
+.sb-g:hover{
+ background:rgba(221,75, 57,1);
+ border: 1px solid rgba(0,0,0,0.7);
+}
+.sb-chat {
+ margin: 5px auto;
+ cursor: pointer;
+ display: block;
+ text-align: center;
+ color: black;
+ font-size: 11px;
+ font-weight: bold;
+ padding: 0px 15px;
+ white-space: pre-wrap;
+ -webkit-border-radius: 2px;
+ -moz-border-radius: 2px;
+ border-radius: 2px;
+ -webkit-transition: all 2.218s;
+ -moz-transition: all 2.218s;
+ -ms-transition: all 2.218s;
+ -o-transition: all 2.218s;
+ transition: all 2.218s;
+ border: 1px solid gainsboro;
+ background: white;
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ user-select: none;
+ cursor: pointer;
+}
+.sb-chat:hover {
+ -webkit-border-radius: 2px;
+ -moz-border-radius: 2px;
+ border-radius: 2px;
+ -webkit-transition: all 0.218s;
+ -moz-transition: all 0.218s;
+ -ms-transition: all 0.218s;
+ -o-transition: all 0.218s;
+ transition: all 0.218s;
+ background:#CCC;
+ border: 1px solid #dcdcdc;
+ border: 1px solid rgba(0,0,0,0.1);
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ user-select: none;
+}
+.list .sb-chat{
+ line-height: 4px;
+}
+textarea{
+ min-width: 300px;
+ min-height: 70px;
+}
+.close{
+ display:block;
+ cursor:pointer;
+ background:url(//cdn.nokedo.com/images/close-btn.png);
+ height:12px;
+ width:12px;
+}
+/*End Appearance*/

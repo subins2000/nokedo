@@ -1,0 +1,69 @@
+#search #vl{
+ margin-left:22%;
+}
+#pagination{
+ background: #EEE;
+ width: 100%;
+ position: fixed;
+ bottom: -14px;
+ left: 110px;
+ right: 0px;
+ height: 40px;
+ left:0px;
+ padding-top: 5px;
+ width:100%;
+}
+#pagination .pgn{
+ width: 50px;
+ text-align: center;
+ color:white;
+ cursor: pointer;
+}
+#pagination table{
+ margin-top:3px;
+}
+.nc{
+ font-size: 20px;
+ text-align: center;
+ font-weight: bold;
+}
+.overlap{
+ z-index:-1;
+ opacity:.7;
+}
+.ac_results {
+ padding: 0px;
+ border: 1px solid black;
+ background-color: white;
+ overflow: hidden;
+ z-index: 9;
+}
+.ac_results ul {
+ width: 100%;
+ list-style-position: outside;
+ list-style: none;
+ padding: 0;
+ margin: 0;
+}
+.ac_results li{
+ margin: 0px;
+ padding: 2px 5px;
+ cursor: default;
+ display: block;
+ font: menu;
+ font-size: 12px;
+ line-height: 16px;
+ overflow: hidden;
+}
+.ac_loading {
+ background: white url('indicator.gif') right center no-repeat;
+}
+.ac_odd {
+ background-color: #eee;
+}
+.ac_over {
+ background-color: #CCC;
+}
+.selected{
+ border-left:2px solid #DD4B39;
+}

@@ -1,0 +1,302 @@
+#content{
+ width:750px;
+}
+.postform #togform{
+ margin:0px auto;
+ display:table;
+ min-height:18px;
+ margin-top: -17px;
+}
+.postform textarea{
+ width:96%;
+}
+.postform .form{
+ display:none;
+ background:white;
+ padding:8px 15px;
+ border-radius:15px;
+}
+.postform table{
+ margin: 0px auto;
+}
+.postform .close{
+ float: right;
+}
+.postform .bot-panel{
+ width:100%;
+ display: table;
+ position: relative;
+}
+.postform input[type=submit]{
+ float:right;
+ margin-right: 30px;
+}
+.postform .small{
+ background:url(//cdn.nokedo.com/images/web.png);
+ height: 33px;
+ min-width: 34px;
+ background-color:white;
+}
+.postform .cam{
+ background:url(//cdn.nokedo.com/images/camera.png) no-repeat;
+ background-position: center 3px;
+ height: 33px;
+ min-width: 34px;
+ background-color:white;
+}
+.postform .bot-panel #privacy{
+ position: absolute;
+ top: 32;
+ left: 0px;
+ width: 210px;
+ background: white;
+ text-align: center;
+ border: 1px solid black;
+ z-index: 2;
+}
+.postform #upimg{
+ opacity:0;
+ height:0px;
+ width:0px;
+ positon:absolute;
+}
+#feed{
+ display:block;
+ color:white;
+}
+.post{
+ opacity: .8;
+ border-radius: 15px;
+ background:rgba(0,0,0,.7);
+ border-top: 1px solid white;
+ padding:12px 16px;
+ vertical-align: top;
+ position:relative;
+}
+.post.mil{
+ background:rgb(61, 148, 0);
+}
+.post.pro{
+ background:rgb(77, 144, 254);
+}
+.post.dis{
+ background:rgba(221, 75, 57, 0.901961);
+}
+.post:hover{
+ opacity:1;
+}
+.post a{
+ color:rgb(78, 75, 247);
+ text-decoration:none;
+}
+.post a:visited{
+ color:rgb(78, 78, 247);
+}
+.post .left .bottom{
+ text-align:center;
+ margin-top:5px;
+}
+.like{
+ background:url('//cdn.nokedo.com/images/sprites.png');
+ background-position: -5px -3px;
+ cursor:pointer;
+ text-align: right;
+ padding-left: 15px;
+ display: inline-block;
+ width: 13px;
+}
+.unlike{
+ background:url('//cdn.nokedo.com/images/sprites.png');
+ background-position: -5px -22px;
+ cursor:pointer;
+ text-align: right;
+ padding-left: 15px;
+ display: inline-block;
+ width: 13px;
+}
+.cmt{
+ background:url('//cdn.nokedo.com/images/sprites.png');
+ background-position: -5px -40px;
+ cursor:pointer;
+ text-align: right;
+ margin-top:5px;
+ padding-left: 23px;
+ display: inline-block;
+}
+.post .left img{
+ height:40px;
+ width:40px;
+ border-radius:15px;
+}
+.post .left{
+ display:inline-block;
+}
+.post .right{
+ display:inline-block;
+ vertical-align: top;
+ margin-left: 10px;
+ width: 88%;
+}
+.post .right .container{
+ background: rgba(255,255,255,.7);
+ color: black;
+ padding:10px 11px;
+ border-radius: 15px;
+}
+.comments{
+ background: rgba(255, 255, 255, .9);
+ padding: 10px 11px;
+ margin-top: 5px;
+ border-radius: 15px;
+ color:black;
+ display:none;
+}
+.comments .comment{
+ border-top: 1px solid black;
+ margin-top: 5px;
+ padding-top: 5px;
+ position:relative;
+}
+.comment .left{
+ display:inline-block;
+}
+.comment .left img{
+ width: 32px;
+ height: 32px;
+}
+.comment .right{
+ display:inline-block;
+ vertical-align: top;
+ margin-left: 5px;
+}
+.photo .comment .cont{
+ max-width: 230px;
+}
+.photo .comments .loader{
+ overflow: auto;
+ max-height:250px;
+}
+.post .comments .loader{
+ overflow: auto;
+ max-height:150px;
+}
+.comments .comment .info{
+ border: none;
+ padding-bottom:0px;
+}
+.comments .comment .time{
+ color: gray;
+ margin-left:5px;
+}
+.comments .cmtform{
+ border-top: 1px solid black;
+ width: 100%;
+ margin-top: 10px;
+ margin-bottom: 0em;
+}
+.comments .cmtform input[type=text]{
+ vertical-align: middle;
+ display:table-cell;
+ min-width:0px !important;
+}
+.photo .comments .cmtform input[type=submit]{
+ margin:0px;
+}
+.post .cont{
+ display: inline-block;
+ vertical-align: top;
+ margin-top:1px;
+ white-space: pre-wrap;
+}
+img.postimg,.postimg img{
+ border: 2px solid black;
+ margin-top: 5px;
+ cursor:pointer;
+ display:block;
+ max-height: 300px;
+ max-width: 70%;
+ color:black;
+}
+.post .info{
+ border-bottom: 1px solid white;
+ width: 100%;
+ padding-bottom: 5px;
+}
+.post .info .time{
+ margin-left:15px;
+ color:grey;
+}
+.mopt,.copt{
+ cursor:pointer;
+ background: no-repeat url(//cdn.nokedo.com/images/sprites.png) -2px -58px;
+ height: 13px;
+ width: 13px;
+ position: absolute;
+ right: 10px;
+ top: 5px;
+}
+.moptb,.coptb{
+ background:white;
+ display:none;
+ padding:10px;
+ border:1px solid #CCC;
+ position: absolute;
+ right: 15px;
+ top: 22px;
+ z-index:10;
+}
+.moptb button,.coptb button{
+ width: 100%;
+}
+.photo .phleft{
+ display:table-cell;
+ background:black;
+ padding:10px;
+}
+.photo .phright{
+ display:table-cell;
+ height:400px;
+ width:310px;
+ border-left:1px solid #CCC;
+ padding:8px;
+}
+.unfollow{
+ width:100%;
+}
+/*Profile*/
+.icont{
+ background:black;
+ color:white;
+ padding:10px 15px;
+ border-radius:15px;
+ border-top:1px solid #EEE;
+ display: table;
+ width:100%;
+}
+.icont d,.icont v,.icont .sb-g{
+ display:table-cell;
+ vertical-align:middle;
+ width: 65%;
+}
+.icont d{
+ width: 100px;
+}
+/*End Profile CSS (12-8-2013)*/
+.lside,.rside{
+ display:inline-block;
+ vertical-align:top;
+}
+.rside{
+ width: 74%;
+ margin-left: 6px;
+ border-left: 1px solid black;
+ padding-left: 6px;
+}
+.lmc{
+ display: block;
+ margin-top: 5px;
+ border-top: 1px solid black;
+ text-align: center;
+ padding-top: 5px;
+ cursor:pointer;
+}

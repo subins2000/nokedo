@@ -1,0 +1,6 @@
+#q{margin-left: 15px;position: relative;display: inline-block;padding: 12px 14px;text-align: center;background-color: #fff;border: 8px solid #666;-webkit-border-radius: 30px;-moz-border-radius: 30px;border-radius: 30px;-webkit-box-shadow: 2px 2px 4px #888;-moz-box-shadow: 2px 2px 4px #888;box-shadow: 2px 2px 4px #888;}
+#q:before{content: ' ';position: absolute;width: 0;height: 0;left: -43px;top: -1px;border: 22px solid;border-color: transparent #666 transparent transparent;}
+.terminal{cursor:text;color: rgb(170, 170, 170);background-color: black;padding:8px 15px;margin-top:10px;color:white;font-size:17px;}
+.cursor{height:15px;width:5px;background:white;display:inline-block;vertical-align:bottom;}
+.ar{color:#CCC;display:inline-block;vertical-align:top;}
+.txt{word-spacing: 3;}

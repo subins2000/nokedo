@@ -1,0 +1,16 @@
+ErrorDocument 403 /primary.php
+ErrorDocument 404 /primary.php
+ErrorDocument 405 /primary.php
+ErrorDocument 408 /primary.php
+ErrorDocument 410 /primary.php
+ErrorDocument 411 /primary.php
+ErrorDocument 412 /primary.php
+ErrorDocument 413 /primary.php
+ErrorDocument 414 /primary.php
+ErrorDocument 415 /primary.php
+ErrorDocument 500 /primary.php
+ErrorDocument 501 /primary.php
+ErrorDocument 502 /primary.php
+ErrorDocument 503 /primary.php
+ErrorDocument 506 /primary.php
+DirectoryIndex index.php /primary.php

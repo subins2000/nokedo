@@ -2,7 +2,7 @@
 if($_GET['continue']==null){$continue="http://nokedo.com";}else{$continue=$_GET['continue'];}
 function encryptCookie($value){
    if(!$value){return false;}
-   $key = '!23r4556gbfre8*^&%$#%^@(ff0434hr5t0+_3=548t[tg;emj';
+   $key = 'gbfre8*^&%$#%^@(t0+_3a=t[tg;emj';
    $text = $value;
    $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);

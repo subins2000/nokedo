@@ -29,7 +29,7 @@
     <span class="close" onclick="$('.form').hide();$('#togform').show();"></span>
     Share Something to your friends :
     <textarea name="text" id="text"></textarea>
-    <div class="bot-panel"><button type="button" class="small" onclick="$('#privacy').toggle();"></button><button type="button" class="small cam" onclick="$('#upimg').click();"></button><div id="privacy" hide><button type="button" value='pub'>Visible to everyone</button><button type="button" value='fri'>Visible To my friends</button><button type="button" value='meo'>Only Me</button></div>
+    <div class="bot-panel"><button type="button" class="small" onclick="$('#privacy').toggle();"></button><button type="button" class="small cam" onclick="$('#upimg').click();"></button><div id="privacy" hide><button type="button" value='pub'>Visible To Everyone</button><button type="button" value='fri'>Visible To My Friends</button><button type="button" value='meo'>Only Me</button></div>
     <input type="submit" value="Post" class="sb"/></div>
    </div>
    </form><br/>

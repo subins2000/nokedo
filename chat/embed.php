@@ -1,7 +1,9 @@
 <?
 Header("content-type: application/x-javascript");
 include('config.php');
-if($who!=$whod){die();}
+if($who!=$whod){
+ ser();
+}
 $sql=$db->prepare("SELECT * FROM fds WHERE uid=? AND fds='1'");
 $sql->execute(array($who));
 $arr=array();
@@ -75,14 +77,19 @@ $('.roster .list .sb-chat').livequery('click',function(){
  }
 });
 $('.chatboxstatus .tvis').livequery('click',function(){
- $(this).parents('.chatbox').find('.fcont').css('display','block').animate({height:0},2000,function(){$(this).fadeOut(function(){$(this).parents('.chatbox').hide();});});
+ $(this).parents('.chatbox').find('.fcont').css('display','block').animate({height:0},2000,function(){
+  $(this).fadeOut(function(){
+   $(this).parents('.chatbox').hide();
+  });
+ });
 });
 window.addEventListener("message",function(e){
  if(e.origin=='http://chat.nokedo.com'){
  var po=e.data;
   $.each(po.statuses,function(k,v){
-  wtr=v=='off' ? "on":"off";
-  $('.roster .list #'+k).find('table tr td:nth-child(2) span').removeClass(wtr).addClass(v);
+   var wtr=v=='off' ? "on":"off";
+   $('.roster .list .sb-chat#'+k).attr("status",v);
+   $('.roster .list .sb-chat#'+k).find('.status').removeClass(wtr).addClass(v);
   });
   if(po.is=="true"){
    $.each(po.users,function(k,v){
@@ -107,3 +114,12 @@ window.addEventListener("message",function(e){
   }
  }
 },false);
+setInterval(function(){
+ if($(".roster .list .sb-chat").length>1){
+  $(".roster .list .sb-chat[status=on]").each(function(){
+   if($(this).is(':not(:first-child)')==true){
+    $(".roster .list .sb-chat:first").before($(this)[0]);
+   }
+  });
+ }
+},1000);

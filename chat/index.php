@@ -30,7 +30,7 @@
    }
    ?>
   </div>
-  <script>if($(".users .sb-g").length!=0 && $(".users .sb").length>1){$(".users .sb-g").each(function(){if($(this).is(':not(:first-child)')==false){$(".users .sb:first").before($(this)[0]);}});}</script>
+  <script>if($(".users .sb-g").length!=0 && $(".users .sb").length>1){$(".users .sb-g").each(function(){if($(this).is(':not(:first-child)')==true){$(".users .sb:first").before($(this)[0]);}});}</script>
  </div><br/>
  <div class='rooms'>
   Public Rooms :<br/>

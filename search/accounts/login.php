@@ -1,6 +1,12 @@
 <?
-include('../config.php');if($_GET['c']!=''){$continue=$_GET['c'];}else{$continue="http://nokedo.com";}$u=$_POST['user'];$p=$_POST['pass'];
-function encryptCookie($value){if(!$value){return false;}$key = '!23r4556gbfre8*^&%$#%^@(ff0434hr5t0+_3=548t[tg;emj';$text = $value;$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv);return trim(base64_encode($crypttext));}
+include('../config.php');
+if($_GET['c']!=''){
+ $continue=urldecode($_GET['c']);
+}else{
+ $continue="http://nokedo.com";
+}
+$u=$_POST['user'];
+$p=$_POST['pass'];
 if($u!='' && $p!=''){
  $sql=$db->prepare("SELECT * FROM users WHERE username=?");
  $sql->execute(array($u));
@@ -10,10 +16,10 @@ if($u!='' && $p!=''){
  if($up==$salted_hash){
   if(isset($_POST['rm'])){
    setcookie("curuser", $id, time()+301014600, "/", "nokedo.com");
-   setcookie("wervsi", encryptCookie($id), time()+301014600, "/", "nokedo.com");
+   setcookie("wervsi", encrypter($id), time()+301014600, "/", "nokedo.com");
   }else{
    setcookie("curuser", $id, false, "/", "nokedo.com");
-   setcookie("wervsi", encryptCookie($id), false, "/", "nokedo.com");
+   setcookie("wervsi", encrypter($id), false, "/", "nokedo.com");
   }
   header("Location: $continue");
   $s=1;

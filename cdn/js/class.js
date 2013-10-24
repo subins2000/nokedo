@@ -1,4 +1,5 @@
 localStorage['whty']="";
+tmp();
 $('.postform #privacy button:first').addClass('sb-b');
 $("#switcher td button").on('click',function(){
  $(".postform .form").css('background',$(this).css('background-color'));
@@ -43,13 +44,20 @@ $(".postform").die('submit').on('submit',function(){
  }
  return false;
 });
-$('.postform #privacy button').on('click',function(){$('.postform #privacy button.sb-b').removeClass('sb-b');$(this).addClass('sb-b');$('.postform #privacy').hide();$("#pr").val($(this).attr('value'));});
+$('.postform #privacy button').on('click',function(){
+ $('.postform #privacy button.sb-b').removeClass('sb-b');
+ $(this).addClass('sb-b');
+ $('.postform #privacy').hide();
+ $("#pr").val($(this).attr('value'));
+});
 $('#tgfeed button').live('click',function(){
  $("#feed").tload();
  localStorage['whty']=$(this).text().slice(0,3).toLowerCase();
  $(".postform .form").css('background',$(this).css('background-color'));
  localStorage['ps']=$(this).text().slice(0,3).toLowerCase();
- $.post('http://class.nokedo.com/data.php',{data:"1",type:$(this).text().slice(0,3).toLowerCase()},function(data){$("#feed").html(data);});
+ $.post('http://class.nokedo.com/data.php',{data:"1",type:$(this).text().slice(0,3).toLowerCase()},function(data){
+  $("#feed").html(data);
+ });
 });
 $('.cont .postimg').livequery('click',function(event){
  event.preventDefault();
@@ -138,28 +146,35 @@ $('.cmtform').die('submit').live('submit',function(event){
  event.preventDefault();
  var id=$(this).attr('id');
  varaw=$(this);
+ tmpid=tmp();
  if($(this).find('[type=text]').val()!='' && $(this).attr('id')!=''){
   var json={action:'cmt',new:$(this).find('[type=text]').val(),id:$(this).attr('id')};
   $('.cmt#'+id).each(function(){
    $(this).text(parseFloat($(this).text())+1);
   });
-  $('.loader#'+$(this).attr('id')).find('.comment:last').after('<div class="comment" id="usercmt"><div class="left"><img src="'+info['img']+'"/></div><div class="right"><div class="info"><a href="../profile.php?id='+info['uid']+'">'+info['name'].split(' ')[0]+'</a><span class="time timeago" title="'+cti()+'"></span></div><div class="cont">'+filt($(this).find('[type=text]').val())+'</div></div></div>');
+  $('.loader#'+$(this).attr('id')).find('.comment:last').after('<div class="comment" id="'+tmpid+'"><div class="left"><img src="'+info['img']+'"/></div><div class="right"><div class="info"><a href="../profile.php?id='+info['uid']+'">'+info['name'].split(' ')[0]+'</a><span class="time timeago" title="'+cti()+'"></span></div><div class="cont">'+filt($(this).find('[type=text]').val())+'</div></div></div>');
   if($('.loader#'+$(this).attr('id')).find('.comment:last').length==0){
-   $('.loader#'+$(this).attr('id')).html("<div class='comment' id='usercmt'><div class='left'><img src='"+info['img']+"'/></div><div class='right'><div class='info'><a href='../profile.php?id="+info['uid']+"'>"+info['name'].split(' ')[0]+"</a><span class='time timeago' title='"+cti()+"'></span></div><div class='cont'>"+filt($(this).find('[type=text]').val())+"</div></div></div>");
+   $('.loader#'+$(this).attr('id')).html("<div class='comment' id='"+tmpid+"'><div class='left'><img src='"+info['img']+"'/></div><div class='right'><div class='info'><a href='../profile.php?id="+info['uid']+"'>"+info['name'].split(' ')[0]+"</a><span class='time timeago' title='"+cti()+"'></span></div><div class='cont'>"+filt($(this).find('[type=text]').val())+"</div></div></div>");
   }
   $.post('http://class.nokedo.com/action.php',json,function(data){varaw[0].reset();varaw.find(':input:disabled').prop('disabled',false);}).error(function(){
    shown({message:"Failed to comment on post",type:"error"});
-   $('.loader#'+id).find('.comment#usercmt:last').remove();
+   $('.loader#'+id).find('.comment#'+tmpid+':last').remove();
    $('.cmt#'+id).text(parseFloat($('.cmt#'+id).text())-1);
    if($('.loader#'+id).text()==''){
     $('.loader#'+id).html("<h2>No Comments</h2>");
    }
    varaw[0].reset();
    varaw.find(':input:disabled').prop('disabled',false);
+  }).error(function(){
+   shown({message:"Failed to comment on post. Try Again.",type:"error"});
+   $(".comment#"+tmpid).remove();
+   varaw[0].reset();
+   varaw.find(':input:disabled').prop('disabled',false);
   });
  }else{
-  shown({message:"Failed to comment on post",type:"error"});
-  $(this)[0].reset();$(this).find(':input:disabled').prop('disabled',false);
+  shown({message:"Failed to comment on post. Try Again.",type:"error"});
+  varaw[0].reset();
+  varaw.find(':input:disabled').prop('disabled',false);
  }
 });
 $('.follow').expire().livequery('click',function(){

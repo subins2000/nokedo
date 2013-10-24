@@ -50,6 +50,10 @@ a:visited{
  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
  box-shadow: 0 2px 3px rgba(0, 0, 0, .25);
  z-index:5;
+ background-image: url(//cdn.nokedo.com/images/logo.png);
+ background-position: 18px;
+ background-repeat: no-repeat;
+ background-size: 5em;
 }
 .top mn{
  display: inline-block;
@@ -138,7 +142,7 @@ a:visited{
  display:none;
  z-index:10;
 }
-[hide]{
+[hide],[hidden]{
  display:none;
 }
 /*Scroll Bars*/
@@ -327,3 +331,22 @@ textarea{
  width:12px;
 }
 /*End Appearance*/
+.fb_butt{
+ width: 238px;
+ display: block;
+ float: left;
+ height: 43px;
+ margin: 0px;
+ padding: 0px 0px 0px 72px;
+ font-family: 'Ubuntu', sans-serif;
+ font-size: 18px;
+ font-weight: 400;
+ color: #fff;
+ line-height: 41px;
+ background: #3b579d url(//cdn.nokedo.com/images/fb_icon.png) no-repeat 14px 8px scroll;
+ -webkit-border-radius: 4px;
+ -moz-border-radius: 4px;
+ border-radius: 4px;
+ text-decoration: none;
+ cursor:pointer;
+}

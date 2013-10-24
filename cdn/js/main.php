@@ -1,4 +1,3 @@
-<?include('../config.php');?>
 function cti(){var currentdate = new Date();
  var time=currentdate.getFullYear()+"-"+(currentdate.getMonth()+1)+"-"+currentdate.getDate()+" "+currentdate.getHours()+":"+currentdate.getMinutes()+":"+currentdate.getSeconds();
  return time;
@@ -16,7 +15,18 @@ window.filt=function($msg){$msg=$msg.replace(/\</g,'&lt;');
  $msg=$msg.replace("//class.nokedo.com/explore.php?hash=#","//class.nokedo.com/explore.php?hash=%23");
  return $msg;
 };
-$("body").append('<div class="top"><mn><a class="ser" href="//nokedo.com">Search</a><a class="ser" href="//class.nokedo.com">MyClass</a><a class="ser" href="//get.nokedo.com">Store</a><a class="ser" href="//chat.nokedo.com">Chat</a><a class="ser" href="//sites.nokedo.com">Sites</a></mn><shn><?if($who==$whod){?><button id="tname" class="sb"><?echo$in['name'];?></button><?}else{?><button class="sb" onclick="window.location=\'http://nokedo.com/accounts/login.php?c='+location+'\'">Log In</button><button class="sb sb-red" onclick="window.location=\'http://nokedo.com/accounts/signup.php\';">Sign Up</button><?}?></shn></div><?if($who==$whod){?><div class="sprofile"><div class="sprofile-l"><h3><?if(strlen($in['name'])>20){echo explode(' ',$in['name'])[0];}else{echo$in['name'];}?></h3><a href="//class.nokedo.com/profile.php"><button class="sb sb-b">View Profile</button></a></div><div class="sprofile-r"><div id="chimg" class="cboxframe" width="400" height="200" href="//cdn.nokedo.com/pic.php">Change Picture</div><img height="100" src="<?echo $img;?>" width="120"></div><div class="sprofile-b"><a href="//nokedo.com/accounts"><button class="sb sb-b" style="margin-left:10px;">Manage Account</button></a><form style="position:absolute;right: 20px;top:1px;" method="post" action="//nokedo.com/accounts/login.php?c='+location+'"><button id="sout" class="sb sb-red" type="submit" name="logout">Log Out</button></form></div><?}?></div>');
+window.tmp=function(){
+ p={};
+ r=((Math.random() * (2000 - 0) + 0)+'"').split(".")[0];
+ if(p[r]==null){
+  p[r]=true;
+ }else{
+  r=((Math.random() * (2000 - 0) + 0)+'"').split(".")[0];
+  p[r]=true;
+ }
+ return r;
+};
+$("body").append('<div class="top"><mn><a class="ser" href="//nokedo.com">Search</a><a class="ser" href="//class.nokedo.com">MyClass</a><a class="ser" href="//get.nokedo.com">Store</a><a class="ser" href="//chat.nokedo.com">Chat</a><a class="ser" href="//sites.nokedo.com">Sites</a></mn><shn><?if($who==$whod){?><button id="tname" class="sb"><?echo$in['name'];?></button><?}else{?><button class="sb" onclick="window.location=\'http://nokedo.com/accounts/login.php?c='+location+'\'">Log In</button><button class="sb sb-red" onclick="window.location=\'http://nokedo.com/accounts/signup.php\';">Sign Up</button><?}?></shn></div><?if($who==$whod){?><div class="sprofile"><div class="sprofile-l"><h3><?if(strlen($in['name'])>20){echo explode(' ',$in['name'])[0];}else{echo$in['name'];}?></h3><a href="//class.nokedo.com/profile.php"><button class="sb sb-b">View Profile</button></a></div><div class="sprofile-r"><div id="chimg" class="cboxframe" width="400" height="250" href="//cdn.nokedo.com/pic.php">Change Picture</div><img height="100" src="<?echo$img;?>" width="120"></div><div class="sprofile-b"><a href="//nokedo.com/accounts"><button class="sb sb-b" style="margin-left:10px;">Manage Account</button></a><form style="position:absolute;right: 20px;top:1px;" method="post" action="//nokedo.com/accounts/login.php?c='+location+'"><button id="sout" class="sb sb-red" type="submit" name="logout">Log Out</button></form></div><?}?></div>');
 $("#content").after('<div style="background: #EEE;border-top: 1px solid black;padding:4px 5px 8px 5px;position: absolute;right: 0px;left: 0px;"><div style="display: inline-block;margin-left: 40px;">&copy;<a href="//class.nokedo.com/profile.php?id=1">Subin Siby</a> <?echo date('Y');?> (Forever and ever)</div><div style="float: right;display: inline-block;margin-right: 20px;"><a href="//nokedo.com/about.php#privacy">Privacy Policy</a>, <a href="//nokedo.com/about.php#terms">Terms and Conditions</a>, <a href="//nokedo.com/about.php">About Nokedo</a></div></div>');
 $("#tname").on('click',function(){
  $('.sprofile').toggle('100');
@@ -36,7 +46,7 @@ window.shown=function(e){
  }
  var r='<div id="info_message" class="'+n+'"><div class="center_auto"><div class="info_message_text message_area">';
  r+=t["message"];
- r+='</div><div class="info_close_btn button_area" onclick="return closeNotification()"></div><div class="clearboth"></div>';
+ r+='</div><div class="info_close_btn button_area" onclick="return closeNotification(0)"></div><div class="clearboth"></div>';
  r+='</div><div class="info_more_descrption"></div></div>';
  $notification=$(r);
  $("body").append($notification);
@@ -72,7 +82,6 @@ setInterval(function(){
  $(".cboxajax").colorbox({ajax:true});
 },1);
 $(".cboxframe").live('click',function(){
- alert();
  $(this).colorbox({iframe:true,width:$(this).attr('width'),height:$(this).attr('height')});
  if($(this).data('alcl')!=1){
   $(this)[0].click();$(this).data('alcl',1);

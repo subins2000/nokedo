@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-<script src="http://cdn.nokedo.com/js/js.php"></script>
+<script src="//cdn.nokedo.com/js/js.php"></script>
 <link href="//cdn.nokedo.com/css/all.php" rel="stylesheet">
 <title>Nokedo - A dev network</title>
 </head><body>

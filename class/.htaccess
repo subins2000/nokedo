@@ -14,3 +14,7 @@ ErrorDocument 502 /primary.php
 ErrorDocument 503 /primary.php
 ErrorDocument 506 /primary.php
 DirectoryIndex index.php /primary.php
+<Files ^(*.php|*.phps)>
+    order deny,allow
+    deny from all
+</Files>

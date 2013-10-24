@@ -31,7 +31,7 @@ if(is_numeric($id) && $_POST['r']!=true && $msg!=''){
   }
  }
  echo "');";
- echo 'if($(".users .sb-g").length!=0 && $(".users .sb").length>1){$(".users .sb-g").each(function(){if($(this).is(":not(:first-child)")==false){$(".users .sb:first").before($(this)[0]);}});}';
+ echo 'if($(".users .sb-g").length!=0 && $(".users .sb").length>1){$(".users .sb-g").each(function(){if($(this).is(":not(:first-child)")==true){$(".users .sb:first").before($(this)[0]);}});}';
 }elseif(is_numeric($id) && $_POST['r']==true && $msg!=''){
  $sql=$db->prepare("SELECT * FROM rchat WHERE room=? ORDER BY id DESC LIMIT 1");
  $sql->execute(array($id));
@@ -58,9 +58,9 @@ if(is_numeric($id) && $_POST['r']!=true && $msg!=''){
   }
  }
  echo "');";
- echo 'if($(".users .sb-g").length!=0 && $(".users .sb").length>1){$(".users .sb-g").each(function(){if($(this).is(":not(:first-child)")==false){$(".users .sb:first").before($(this)[0]);}});}';
+ echo 'if($(".users .sb-g").length!=0 && $(".users .sb").length>1){$(".users .sb-g").each(function(){if($(this).is(":not(:first-child)")==true){$(".users .sb:first").before($(this)[0]);}});}';
 }else{
-header("content-type: text/html");
-ser();
+ header("content-type: text/html");
+ ser();
 }
 ?>

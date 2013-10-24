@@ -1,5 +1,7 @@
 <?
-if(!isset($_POST) && !isset($_GET['awregvawegb'])){header("HTTP/1.0 404 Not Found");include('primary.php');exit;}
+if(!isset($_POST) && !isset($_GET['awregvawegb'])){
+ ser();
+}
 $k=0;if(isset($_POST['data'])){include('config.php');}$type=$_POST['type'];
 function cmts($i){
  global $db;
@@ -68,14 +70,26 @@ if(isset($_GET['awregvawegb']) || isset($_POST['data'])){
   echo parse($tp);
  }
 }
-function parse($t){global$sql;global $whod;
-if($sql->rowCount()==0){$r.='<div style="color:black;"><h2>No Posts to show</h2></div>';if($_POST['user']==''){$r.='<div style="color:black;">Try <a href="../find.php">Adding someone</a><br/><br/>Or <a href="../explore.php">See all the public posts</a><br/><br/></div>';}return $r;}
-foreach($t as $k){$wslou=$k['liked'];$id=$k['id'];$user=$k['user'];
-$html.="<div class='post ".$k['ty']."' id='".$id."'><div onclick=\"$('.moptb#$id').toggle();\" class='mopt'></div><div id='$id' class='moptb'><button onclick=\"alert('http://class.nokedo.com/view.php?id=$id');\" class='sb sb-submit'>Link To This Post</button>";
-if($user==$whod){
-$html.='<br/><button style=\'margin-top: 10px;\' onclick="var awd= confirm(\'Do you wish to delete this post ?\');if(awd==true){$.post(\'../action.php\',{action:\'dpost\',id:\''.$id.'\'},function(data){$(\'.post#'.$id.'\').remove();}).error(function(){shown({message:\'Failed to delete post\',type:\'error\'});});}" class=\'sb sb-submit\'>Delete Post</button>';}
-$html.="</div><div class='left'><img src='".get('imgs',$user)."'/><div class='bottom'><div class='$wslou' title='$wslou' id='".$id."'>".$k['likes']."</div><br/><div class='cmt' id='".$id."'>".$k['cmt']."</div></div></div><div class='right'><div class='container'><div class='info'><a href='../profile.php?id=".$k['user']."'>".un($k['user'])['name']."</a><a href='../view.php?id=".$id."'><span class='time timeago' title='".$k['o']['time']."'>".date_format(date_create($k['o']['time']), 'd F 20y h:m:s')."</span>&nbsp;&nbsp;&nbsp;<span style='color:gray;' title='".$k['pr']."'>".$k['prs']."</span></a></div><div class='cont'>".$k['p']."</div><div class='extra' hide>".htmlspecialchars($k['p'])."</div></div><div class='comments' id='".$id."'><div class='loader' id='".$id."'>".cmts($id)."</div><form class='cmtform' id='".$id."'><input style='width:70%;' placeholder='Type your comment here' type='text'><input type='submit' style='margin-top: 6px;' class='sb sb-b' value='Comment'/></form></div></div></div>";
-}
+function parse($t){
+ global$sql;
+ global $whod;
+ if($sql->rowCount()==0){
+  $r.='<div style="color:black;"><h2>No Posts to show</h2></div>';
+  if($_POST['user']==''){
+   $r.='<div style="color:black;">Try <a href="../find.php">Adding someone</a><br/><br/>Or <a href="../explore.php">See all the public posts</a><br/><br/></div>';
+  }
+ return $r;
+ }
+ foreach($t as $k){
+  $wslou=$k['liked'];
+  $id=$k['id'];
+  $user=$k['user'];
+  $html.="<div class='post ".$k['ty']."' id='".$id."'><div onclick=\"$('.moptb#$id').toggle();\" class='mopt'></div><div id='$id' class='moptb'><button onclick=\"alert('http://class.nokedo.com/view.php?id=$id');\" class='sb sb-submit'>Link To This Post</button>";
+  if($user==$whod){
+   $html.='<br/><button style=\'margin-top: 10px;\' onclick="var awd= confirm(\'Do you wish to delete this post ?\');if(awd==true){$.post(\'../action.php\',{action:\'dpost\',id:\''.$id.'\'},function(data){$(\'.post#'.$id.'\').remove();}).error(function(){shown({message:\'Failed to delete post\',type:\'error\'});});}" class=\'sb sb-submit\'>Delete Post</button>';
+  }
+  $html.="</div><div class='left'><img src='".get('imgs',$user)."'/><div class='bottom'><div class='$wslou' title='$wslou' id='".$id."'>".$k['likes']."</div><br/><div class='cmt' id='".$id."'>".$k['cmt']."</div></div></div><div class='right'><div class='container'><div class='info'><a href='../profile.php?id=".$k['user']."'>".un($k['user'])['name']."</a><a href='../view.php?id=".$id."'><span class='time timeago' title='".$k['o']['time']."'>".date_format(date_create($k['o']['time']), 'd F 20y h:m:s')."</span>&nbsp;&nbsp;&nbsp;<span style='color:gray;' title='".$k['pr']."'>".$k['prs']."</span></a></div><div class='cont'>".$k['p']."</div><div class='extra' hide>".htmlspecialchars($k['p'])."</div></div><div class='comments' id='".$id."'><div class='loader' id='".$id."'>".cmts($id)."</div><form class='cmtform' id='".$id."'><input size='40' placeholder='Type your comment here' type='text'><input type='submit' style='margin: 0px;' class='sb sb-b' value='Comment'/></form></div></div></div>";
+ }
 return $html;
 }
 ?>

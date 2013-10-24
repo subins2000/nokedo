@@ -53,7 +53,7 @@
  box-sizing:content-box;
 }
 #cboxOverlay{
- background:#000;
+ background:rgba(0,0,0,.6);
 }
 #colorbox{
  outline:0;
@@ -288,6 +288,12 @@ width: 98%;
 }
 .roster .list{
  width: 190px;
+ padding: 5px;
+}
+.roster .list .sb-chat{
+ width: 100%;
+ text-align:left;
+ line-height: 12px;
 }
 .chatboxes{
  position:fixed;
@@ -299,7 +305,7 @@ width: 98%;
  display:inline-block;
  position:relative;
  border:1px solid black;
- height:333px;
+ height:328px;
 }
 .chatboxstatus{
  background:#EEE;

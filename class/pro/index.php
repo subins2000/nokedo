@@ -30,7 +30,7 @@
   <span class="close" onclick="$('.form').hide();$('#togform').show();"></span>
   <table id="switcher"><tbody><tr><td><button type="button" class="sb">Normal</button></td><td><button type="button" class="sb sb-g">Milestone</button></td><td><button type="button" class="sb sb-b">Promote your site</button></td><td><button type="button" class="sb sb-red">Discuss</button></td></tr></tbody></table>
   <textarea name="text" id="text"></textarea>
-  <div class="bot-panel"><button type="button" class="small" onclick="$('#privacy').toggle();"></button><button type="button" class="small cam" onclick="$('#upimg').click();"></button><div id="privacy" hide><button type="button" value='pub'>Visible to everyone</button><button type="button" value='fri'>Visible To my friends</button><button type="button" value='meo'>Only Me</button></div>
+  <div class="bot-panel"><button type="button" class="small" onclick="$('#privacy').toggle();"></button><button type="button" class="small cam" onclick="$('#upimg').click();"></button><div id="privacy" hide><button type="button" value='pub'>Visible to Everyone</button><button type="button" value='fri'>Visible To My Friends</button><button type="button" value='meo'>Only Me</button></div>
   <input type="submit" value="Post" class="sb"/></div>
   </div>
  </form><br/>

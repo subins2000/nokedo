@@ -1,4 +1,5 @@
 <?
+header('Cache-Control: no-cache');
 header("Content-Type:text/css");
 include("cssmin-v3.0.1-minified.php");
 function tyw($s){

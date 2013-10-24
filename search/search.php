@@ -16,7 +16,7 @@
   <center><?echo'<b id="nrf" style="font-size:18px;"> results found</b>';?></center>
   </form>
  </div><script>localStorage['q']="<?echo htmlspecialchars($q);?>";localStorage['p']="<?echo$_GET['p'];?>";</script>
- <div id="results" style="margin: 0px auto;display: table;">
+ <div id="results" style="margin: 5px auto;display: table;">
   <?$_POST['asfvsad']=1;$_POST['q']=$q;include('get.php');?>
  </div>
 </div>

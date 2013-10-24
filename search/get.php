@@ -11,7 +11,7 @@ $st=array();$w3=array();$sb=array();$php=array();$wk=array();
   if($li->getAttribute('class')=='r'){
    $links = $li->getElementsByTagName('a');
    if($links->length){
-     $t=$links->item(0)->nodeValue;
+     $t=htmlspecialchars($links->item(0)->nodeValue);
      $url=str_replace('url?q=http://','',$links->item(0)->getAttribute('href'));
      $url=str_replace('url?q=https://','',$url);
      $url=explode('&sa',$url);

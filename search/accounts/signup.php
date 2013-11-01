@@ -10,10 +10,9 @@ if(isset($_POST['name'])){
  $rt=ras('25');
  $sql=$db->prepare('INSERT INTO `users` (username,pass,name,gender,birth,joined,json,salt)VALUES(?,?,?,?,?,NOW(),?,?)');
  $sql->execute(array($m,hash('sha256',$p.")!*@($&#&$^%*)_-+=`~/*-?/.,><;:]{[]}".$rt),$n,$g,$d,'{"img":"//cdn.nokedo.com/images/guest.png","imgs":"//cdn.nokedo.com/images/guest.png","privacy":{"mail":"prt"}}',$rt));
- function encryptCookie($value){if(!$value){return false;}$key = 'gbfre8*^&%$#%^@(t0+_3a=t[tg;emj';$text = $value;$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv);return trim(base64_encode($crypttext));}
  $sql=$db->prepare('SELECT * FROM users WHERE username=?');
  $sql->execute(array($m));while($r=$sql->fetch()){$id=$r['id'];}
- setcookie("wervsi", encryptCookie($id), time()+3600, "/", "nokedo.com");
+ setcookie("wervsi", encrypter($id), time()+3600, "/", "nokedo.com");
  setcookie("curuser", $id, time()+3600, "/", "nokedo.com");
  echo 'Successfull. See your profile <a href="//class.nokedo.com/profile.php">here</a>';
 }else{die('<span style="color:red;">Something\' Wrong. It may be your fault or mine. Anyways just contact <a href="mailto:subins2000@gmail.com">Subin</a></span>');}

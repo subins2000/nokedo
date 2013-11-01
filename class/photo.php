@@ -36,14 +36,25 @@ if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){?>
   </div>
   <div class="bottom">
    <div style="display: table;margin:0px auto;"><div class="<?if($plikes[$id]=='yes'){echo'unlike';}else{echo'like';}?>" id="<?echo$id;?>"><?echo$lk;?></div>&nbsp;&nbsp;&nbsp;<div class="cmt" id="<?echo$id;?>"><?echo$cmt;?></div></div>
-   <div class='comments' style="border-top:1px solid #CCC;margin-top:5px;display:block;" id="<?echo$id?>"><div class='loader' id="<?echo$id?>"><?echo cmts($id)?></div><form class='cmtform' id="<?echo$id;?>"><input placeholder="Type your comment here" type='text'><input type='submit' class="sb sb-b" value='Comment' /></form></div>
+   <div class='comments' style="border-top:1px solid #CCC;margin-top:5px;display:block;" id="<?echo$id?>">
+    <div class='loader' id="<?echo$id?>"><?echo cmts($id)?></div>
+    <form class='cmtform' id="<?echo$id;?>">
+     <input placeholder="Type your comment here" style="min-width: initial;display: inline-block;width: 172px;" type='text'>
+     <input type='submit' class="sb sb-b" style="margin-top: 2px;" value='Comment' />
+    </form>
+   </div>
   </div>
  </div>
 </div>
 <?}else{?>
 <!DOCTYPE html><html><head>
-
+<link href="//cdn.nokedo.com/css/all.php" rel="stylesheet">
+<script src="//cdn.nokedo.com/js/js.php?f=class"></script>
+<title>View Photo | MyClass - A Social Network</title>
 </head><body>
-
+ <div id="content">
+  <h2>Photo Viewer</h2>
+  
+ </div>
 </body></html>
 <?}?>

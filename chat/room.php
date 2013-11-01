@@ -16,7 +16,7 @@
     $sqls=$db->prepare("SELECT * FROM users WHERE id=? ORDER BY `stat`");
     $sqls->execute(array($rs['fid']));
     while($r=$sqls->fetch()){
-     echo "<button onclick=\"window.location='index.php?id=".$r['id']."';\" class='sb sb-chat";
+     echo "<button onclick=\"window.location='http://chat.nokedo.com/users/".$r['id']."';\" class='sb sb-chat";
      if($r['stat']<date('Y-m-d G:i:s',strtotime('- 15 seconds'))){}else{echo " sb-g";}
      echo "' id='".$r['id']."'>".$r['name']."</button>";
     }
@@ -37,14 +37,14 @@
   <?
   $sql=$db->query("SELECT * FROM rooms");
   while($r=$sql->fetch()){
-   echo "<button onclick=\"window.location='room.php?id=".$r['id']."';\" class='sb sb-chat'>{$r['title']}</button>";
+   echo "<button onclick=\"window.location='http://chat.nokedo.com/rooms/".$r['id']."';\" class='sb sb-chat'>{$r['title']}</button>";
   }
   ?>
   </div>
  </div>
  <div class="messages">
   <?if(is_numeric($id)){?>
-  <h2>Room - <?echo $cu;?></h2>
+  <h2>Room - <a href="//chat.nokedo.com/rooms/<?echo$id;?>"><?echo $cu;?></a></h2>
   <?}?>
   <div class="msgbox">
    <?

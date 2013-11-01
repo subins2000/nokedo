@@ -11,4 +11,6 @@ for indir in dirs:
  shutil.copyfile("./primary.php",'./'+indir+"/primary.php")
  os.remove('./'+indir+"/config.php")
  shutil.copyfile("./config.php",'./'+indir+"/config.php")
+ os.remove('./'+indir+"/fmanager.php")
+ shutil.copyfile("./fmanager.php",'./'+indir+"/fmanager.php")
 print "Successfully Updated."

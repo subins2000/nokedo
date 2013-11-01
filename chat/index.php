@@ -1,5 +1,16 @@
 <!DOCTYPE html><html><head>
-<?include('config.php');check();$id=$_GET['id'];?>
+<?
+include('config.php');
+check();
+$id=$_GET['id'];
+if($id!=""){
+ $sql=$db->prepare("SELECT * FROM fds WHERE uid=? AND fid=? AND fds='1'");
+ $sql->execute(array($who,$id));
+ if($sql->rowCount()==0){
+  ser();
+ }
+}
+?>
 <script src="http://cdn.nokedo.com/js/js.php?f=chat"></script>
 <link href="//cdn.nokedo.com/css/all.php" rel="stylesheet">
 <title>Nokedo Chat</title>
@@ -16,16 +27,9 @@
     $sqls=$db->prepare("SELECT * FROM users WHERE id=? ORDER BY `stat`");
     $sqls->execute(array($rs['fid']));
     while($r=$sqls->fetch()){
-     echo "<button onclick=\"window.location='index.php?id=".$r['id']."';\" class='sb sb-chat";
+     echo "<button onclick=\"window.location='http://chat.nokedo.com/users/".$r['id']."';\" class='sb sb-chat";
      if($r['stat']<date('Y-m-d G:i:s',strtotime('- 15 seconds'))){}else{echo " sb-g";}
      echo "' id='".$r['id']."'>".$r['name']."</button>";
-    }
-   }
-   if(is_numeric($id)){
-    $sql=$db->prepare("SELECT * FROM rooms WHERE id=? LIMIT 5");
-    $sql->execute(array($id));
-    while($r=$sql->fetch()){
-     $cu=$r['title'];
     }
    }
    ?>
@@ -37,14 +41,14 @@
   <?
   $sql=$db->query("SELECT * FROM rooms");
   while($r=$sql->fetch()){
-   echo "<button onclick=\"window.location='room.php?id=".$r['id']."';\" class='sb sb-chat'>{$r['title']}</button>";
+   echo "<button onclick=\"window.location='http://chat.nokedo.com/rooms/".$r['id']."';\" class='sb sb-chat'>{$r['title']}</button>";
   }
   ?>
   </div>
  </div>
  <div class="messages">
   <?if(is_numeric($id)){?>
-  <h2>Messages - <a href="//class.nokedo.com/profile.php?id=<?echo$cu?>" target="_blank"><?echo un($cu)['name'];?></a></h2>
+  <h2>Messages - <a href="//class.nokedo.com/profile.php?id=<?echo$id;?>" target="_blank"><?echo un($id)['name'];?></a></h2>
   <?}?>
   <div class="msgbox">
    <?

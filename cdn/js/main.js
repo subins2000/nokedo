@@ -67,3 +67,5 @@ window.shown=function(e){
 setInterval(function(){
  $.post('http://'+window.location.host+'/checks.php',{user:info['uid'],},function(d){});
 },10000);
+/*Outside Closing Of Divs*/
+

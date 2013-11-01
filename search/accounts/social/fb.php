@@ -1,30 +1,21 @@
 <?
 if($_GET['continue']==null){$continue="http://nokedo.com";}else{$continue=$_GET['continue'];}
-function encryptCookie($value){
-   if(!$value){return false;}
-   $key = 'gbfre8*^&%$#%^@(t0+_3a=t[tg;emj';
-   $text = $value;
-   $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-   $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-   $crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv);
-   return trim(base64_encode($crypttext)); //encode for cookie
-}
 include('../../config.php');
 require_once("core/facebook.php");
-$app_id = "165714296941476";
-$app_secret = "0ba6f4cce45369ce09cf618f53e3219d";
+$app_id = "496248883778776";
+$app_secret = "7f6f886bcb24b90ababec191fd6ea4ab";
 $url = "http://nokedo.com/accounts/social/fb.php";
 session_start();
 $config = array();
-$config['appId'] = '165714296941476';
-$config['secret'] = '0ba6f4cce45369ce09cf618f53e3219d';
+$config['appId'] = '496248883778776';
+$config['secret'] = '7f6f886bcb24b90ababec191fd6ea4ab';
 $config['fileUpload'] = false; // optional
 $facebook = new Facebook($config);
 $code = $_REQUEST["code"];
 if(empty($code)) {
-$_SESSION['return']=$continue;
-$_SESSION['state'] = md5(uniqid(rand(), TRUE)); // CSRF protection
-header("Location:https://www.facebook.com/dialog/oauth?scope=email,user_about_me,user_birthday,user_location&client_id=$app_id&redirect_uri=$url&state=".$_SESSION['state']);
+ $_SESSION['return']=$continue;
+ $_SESSION['state'] = md5(uniqid(rand(), TRUE)); // CSRF protection
+ header("Location:https://www.facebook.com/dialog/oauth?scope=email,user_about_me,user_birthday,user_location&client_id=$app_id&redirect_uri=$url&state=".$_SESSION['state']);
 }
    if($_SESSION['state'] && ($_SESSION['state'] === $_REQUEST['state'])) {
      $token_url = "https://graph.facebook.com/oauth/access_token?"
@@ -52,7 +43,7 @@ while($r=mysql_fetch_array($em)){$id=$r['id'];}
 $myusername=$id;save('at',$access_token);save('fbid',$uid);
 mysql_query("UPDATE members SET status='on' WHERE `id`='".mysql_real_escape_string($myusername)."'") or die(mysql_error());
 setcookie("curuser", $myusername, time()+301014600, "/", "nokedo.com");
-setcookie("wervsi", encryptCookie($myusername), time()+301014600, "/", "nokedo.com");
+setcookie("wervsi", encrypter($myusername), time()+301014600, "/", "nokedo.com");
 header("Location:".$_SESSION['return']."");
 }else{
 function age($bMonth,$bDay,$bYear) {
@@ -66,7 +57,7 @@ $em=mysql_query("SELECT * FROM members WHERE username=\"$email\"");
 while($r=mysql_fetch_array($em)){$id=$r['id'];}
 $myusername=$id;
 setcookie("curuser", $myusername, time()+301014600, "/", "nokedo.com");
-setcookie("wervsi", encryptCookie($myusername), time()+301014600, "/", "nokedo.com");
+setcookie("wervsi", encrypter($myusername), time()+301014600, "/", "nokedo.com");
 $to = $email;$mail = $email;$name=$name;$subject = "Subins - Welcome to Subins Family, ".$name;
 $message = "<div style=\"width:100%;background:#CCC;border:2px solid black;height:100px;\"><h1><a href=\"http://subins.hp.af.cm?utm_source=mail&mail=$mail\"><img style=\"margin-left:40px;float:left;\" src=\"http://cdn-subins.hp.af.cm/images/logo.png?utm_source=mail&mail=$mail\"></a></h1><div style=\"float:right;margin-right:40px;font-size:20px;margin-top:20px\"><a href=\"http://accounts-subins.hp.af.cm\">Manage Account</a>&nbsp;&nbsp;&nbsp;<a href=\"http://accounts-subins.hp.af.cm/repass.php\">Forgot password ?</a></div></div>
 <div><h2>Thanks for Signing Up.</h2>

@@ -1,14 +1,5 @@
 <?php
 session_start();
-function encryptCookie($value){
-   if(!$value){return false;}
-   $key = 'gbfre8*^&%$#%^@(t0+_3a=t[tg;emj';
-   $text = $value;
-   $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-   $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-   $crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv);
-   return trim(base64_encode($crypttext)); //encode for cookie
-}
 	require('http.php');
 	require('oauth_client.php');
 	include('../../config.php');
@@ -59,7 +50,7 @@ if($_GET['c']=='' && $_SESSION['continue']==''){$_SESSION['continue']="http://no
 	 if($sql->rowCount()!=0){
 	  while($r=$sql->fetch()){$id=$r['id'];}
 	  setcookie("curuser", $id, time()+301014600, "/", "nokedo.com");
-	  setcookie("wervsi", encryptCookie($id), time()+301014600, "/", "nokedo.com");
+	  setcookie("wervsi", encrypter($id), time()+301014600, "/", "nokedo.com");
 	  header("Location:$loc");
 	 }else{
           function ras($length){$chars='q!f@g#h#n$m%b^v&h*j(k)q_-=jn+sw47894swwfv1h36y8re879d5d2sd2sdf55sf4rwejeq093q732u4j4320238o/.Qkqu93q324nerwf78ew9q823';$size=strlen($chars);for($i=0;$i<$length;$i++){$str.=$chars[rand(0,$size-1)];}return$str;}
@@ -70,7 +61,7 @@ if($_GET['c']=='' && $_SESSION['continue']==''){$_SESSION['continue']="http://no
 	  $sql->execute(array($m));
 	  while($r=$sql->fetch()){$id=$r['id'];}
 	  setcookie("curuser", $id, time()+301014600, "/", "nokedo.com");
-	  setcookie("wervsi", encryptCookie($id), time()+301014600, "/", "nokedo.com");
+	  setcookie("wervsi", encrypter($id), time()+301014600, "/", "nokedo.com");
 	  header("Location:$loc");
 	 }
 	}

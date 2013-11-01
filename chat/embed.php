@@ -1,7 +1,8 @@
 <?
 Header("content-type: application/x-javascript");
 include('config.php');
-if($who!=$whod){
+if($who!=$whod || !isset($_GET['wrevbbfrr']) || !isset($_GET['wevotmcdwe'])){
+ Header("content-type: text/html");
  ser();
 }
 $sql=$db->prepare("SELECT * FROM fds WHERE uid=? AND fds='1'");

@@ -2,7 +2,10 @@
 if(!isset($_POST) && !isset($_GET['awregvawegb'])){
  ser();
 }
-$k=0;if(isset($_POST['data'])){include('config.php');}$type=$_POST['type'];
+$k=0;
+if(isset($_POST['data'])){
+ include('config.php');
+}
 function cmts($i){
  global $db;
  global $who;
@@ -30,24 +33,15 @@ function cmts($i){
 }
 if(isset($_GET['awregvawegb']) || isset($_POST['data'])){
  if($whod==$who || $_POST['user']!=''){
-  if($_POST['ex']!='' && $type!=''){
-   $sql=$db->prepare("SELECT * FROM posts WHERE id < :ex AND (uid=:who OR uid IN (SELECT fid FROM fds WHERE uid=:who)) AND ty=:ty ORDER BY id DESC LIMIT 5");
-   $sql->execute(array(":who"=>$who,":ex"=>$_POST['ex'],":ty"=>$type));
-  }elseif($_POST['ex']!='' && $_POST['uid']!=''){
-   $sql=$db->prepare("SELECT * FROM posts WHERE id < :ex AND (ty='nor' OR ty='pro') AND uid=:who ORDER BY id DESC LIMIT 5");
-   $sql->execute(array(":who"=>$_POST['uid'],":ex"=>$_POST['ex']));
+  if($_POST['ex']!='' && $_POST['uid']!=''){
+   $sql=$db->prepare("SELECT * FROM posts WHERE id < :ex AND uid=:id AND (json LIKE '%pub%' OR (json LIKE '%fri%' AND uid IN (SELECT fid FROM fds WHERE uid=:who AND fid=:id AND fds='1'))) ORDER BY id DESC LIMIT 5");
+   $sql->execute(array(":id"=>$_POST['uid'],":who"=>$who,":ex"=>$_POST['ex']));
   }elseif($_POST['ex']!=''){
-   $sql=$db->prepare("SELECT * FROM posts WHERE id < :ex AND (ty='nor' OR ty='pro') AND (uid=:who OR uid IN (SELECT fid FROM fds WHERE uid=:who)) ORDER BY id DESC LIMIT 5");
+   $sql=$db->prepare("SELECT * FROM posts WHERE id < :ex AND (uid=:who OR uid IN (SELECT fid FROM fds WHERE uid=:who)) ORDER BY id DESC LIMIT 5");
    $sql->execute(array(":who"=>$who,":ex"=>$_POST['ex']));
-  }elseif($type!=''){
-   $sql=$db->prepare("SELECT * FROM posts WHERE ty=:ty AND (uid=:who OR uid IN (SELECT fid FROM fds WHERE uid=:who)) ORDER BY id DESC LIMIT 5");
-   $sql->execute(array(":who"=>$who,":ty"=>$type));
   }elseif($_POST['user']!=''){
    $sql=$db->prepare("SELECT * FROM posts WHERE uid=:id AND (json LIKE '%pub%' OR (json LIKE '%fri%' AND uid IN (SELECT fid FROM fds WHERE uid=:who AND fid=:id AND fds='1'))) ORDER BY id DESC LIMIT 5");
    $sql->execute(array(":id"=>$_POST['user'],":who"=>$who));
-  }elseif($_POST['nor']!=''){
-   $sql=$db->prepare("SELECT * FROM posts WHERE uid=:who AND (ty='nor' OR ty='pro') OR uid IN (SELECT fid FROM fds WHERE uid=:who) AND (json LIKE '%pub%' OR (json LIKE '%fri%' AND uid IN (SELECT fid FROM fds WHERE uid=:who AND fds='1'))) ORDER BY id DESC LIMIT 5");
-   $sql->execute(array(":who"=>$who));
   }else{
    $sql=$db->prepare("SELECT * FROM posts WHERE uid=:who OR uid IN (SELECT fid FROM fds WHERE uid=:who) AND (json LIKE '%pub%' OR (json LIKE '%fri%' AND uid IN (SELECT fid FROM fds WHERE uid=:who AND fds='1'))) ORDER BY id DESC LIMIT 5");
    $sql->execute(array(":who"=>$who));
@@ -61,7 +55,6 @@ if(isset($_GET['awregvawegb']) || isset($_POST['data'])){
    $tp[$k]['likes']=$r['likes'];
    $tp[$k]['cmt']=$r['cmt'];
    $tp[$k]['liked']=$plikes[$r['id']];
-   $tp[$k]['ty']=$r['ty'];
    $tp[$k]['prs']=str_replace('pub','Public',str_replace('meo','Only Me',str_replace('fri','Friends',$tp[$k]['o']['pr'])));
    $tp[$k]['pr']=str_replace('pub','Everyone can see this post',str_replace('meo','Only You can see this post',str_replace('fri','Only your Friends can see this post',$tp[$k]['o']['pr'])));
    if($tp[$k]['liked']=='yes'){$tp[$k]['liked']='unlike';}else{$tp[$k]['liked']='like';}
@@ -84,11 +77,11 @@ function parse($t){
   $wslou=$k['liked'];
   $id=$k['id'];
   $user=$k['user'];
-  $html.="<div class='post ".$k['ty']."' id='".$id."'><div onclick=\"$('.moptb#$id').toggle();\" class='mopt'></div><div id='$id' class='moptb'><button onclick=\"alert('http://class.nokedo.com/view.php?id=$id');\" class='sb sb-submit'>Link To This Post</button>";
+  $html.="<div class='post' id='".$id."'><div onclick=\"$('.moptb#$id').toggle();\" class='mopt'></div><div id='$id' class='moptb'><button onclick=\"alert('http://class.nokedo.com/view.php?id=$id');\" class='sb sb-submit'>Link To This Post</button>";
   if($user==$whod){
    $html.='<br/><button style=\'margin-top: 10px;\' onclick="var awd= confirm(\'Do you wish to delete this post ?\');if(awd==true){$.post(\'../action.php\',{action:\'dpost\',id:\''.$id.'\'},function(data){$(\'.post#'.$id.'\').remove();}).error(function(){shown({message:\'Failed to delete post\',type:\'error\'});});}" class=\'sb sb-submit\'>Delete Post</button>';
   }
-  $html.="</div><div class='left'><img src='".get('imgs',$user)."'/><div class='bottom'><div class='$wslou' title='$wslou' id='".$id."'>".$k['likes']."</div><br/><div class='cmt' id='".$id."'>".$k['cmt']."</div></div></div><div class='right'><div class='container'><div class='info'><a href='../profile.php?id=".$k['user']."'>".un($k['user'])['name']."</a><a href='../view.php?id=".$id."'><span class='time timeago' title='".$k['o']['time']."'>".date_format(date_create($k['o']['time']), 'd F 20y h:m:s')."</span>&nbsp;&nbsp;&nbsp;<span style='color:gray;' title='".$k['pr']."'>".$k['prs']."</span></a></div><div class='cont'>".$k['p']."</div><div class='extra' hide>".htmlspecialchars($k['p'])."</div></div><div class='comments' id='".$id."'><div class='loader' id='".$id."'>".cmts($id)."</div><form class='cmtform' id='".$id."'><input size='40' placeholder='Type your comment here' type='text'><input type='submit' style='margin: 0px;' class='sb sb-b' value='Comment'/></form></div></div></div>";
+  $html.="</div><div class='left'><img src='".get('imgs',$user)."'/><div class='bottom'><div class='$wslou' title='$wslou' id='".$id."'>".$k['likes']."</div><br/><div class='cmt' id='".$id."'>".$k['cmt']."</div></div></div><div class='right'><div class='container'><div class='info'><a href='../profile.php?id=".$k['user']."'>".un($k['user'])['name']."</a><a href='../view.php?id=".$id."'><span class='time timeago' title='".$k['o']['time']."'>".date_format(date_create($k['o']['time']), 'd F 20y h:m:s')."</span>&nbsp;&nbsp;&nbsp;<span style='color:gray;' title='".$k['pr']."'>".$k['prs']."</span></a></div><div class='cont'>".$k['p']."</div><div class='extra' hide>".htmlspecialchars($k['p'])."</div></div><div class='comments' id='".$id."'><div class='loader' id='".$id."'>".cmts($id)."</div><form class='cmtform' id='".$id."'><input placeholder='Type your comment here' type='text'><input type='submit' style='margin-top: 2.5px;' class='sb sb-b' value='Comment'/></form></div></div></div>";
  }
 return $html;
 }

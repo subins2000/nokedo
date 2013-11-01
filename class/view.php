@@ -12,7 +12,6 @@ $sql->execute(array(":who"=>$who,":id"=>$id));
    $tp[$k]['likes']=$r['likes'];
    $tp[$k]['cmt']=$r['cmt'];
    $tp[$k]['liked']=$plikes[$r['id']];
-   $tp[$k]['ty']=$r['ty'];
    $tp[$k]['prs']=str_replace('pub','Public',str_replace('meo','Only Me',str_replace('fri','Friends',$tp[$k]['o']['pr'])));
    $tp[$k]['pr']=str_replace('pub','Everyone can see this post',str_replace('meo','Only You can see this post',str_replace('fri','Only your Friends can see this post',$tp[$k]['o']['pr'])));
    if($tp[$k]['liked']=='yes'){$tp[$k]['liked']='unlike';}else{$tp[$k]['liked']='like';}
@@ -57,7 +56,7 @@ function parse($t){
   $wslou=$k['liked'];
   $id=$k['id'];
   $user=$k['user'];
-  $html.="<div class='post ".$k['ty']."' id='".$id."'><div onclick=\"$('.moptb#$id').toggle();\" class='mopt'></div><div id='$id' class='moptb'><button onclick=\"alert('http://class.nokedo.com/view.php?id=$id');\" class='sb sb-submit'>Link To This Post</button>";
+  $html.="<div class='post' id='".$id."'><div onclick=\"$('.moptb#$id').toggle();\" class='mopt'></div><div id='$id' class='moptb'><button onclick=\"alert('http://class.nokedo.com/view.php?id=$id');\" class='sb sb-submit'>Link To This Post</button>";
   if($user==$whod){
    $html.='<br/><button style=\'margin-top: 10px;\' onclick="var awd= confirm(\'Do you wish to delete this post ?\');if(awd==true){$.post(\'../action.php\',{action:\'dpost\',id:\''.$id.'\'},function(data){$(\'.post#'.$id.'\').remove();}).error(function(){shown({message:\'Failed to delete post\',type:\'error\'});});}" class=\'sb sb-submit\'>Delete Post</button>';
   }

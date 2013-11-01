@@ -1,54 +1,90 @@
-<!DOCTYPE html><html><head>
-<?function age($birthday){list($day,$month,$year) = explode("/",$birthday);$year_diff  = date("Y") - $year;$month_diff = date("m") - $month;$day_diff   = date("d") - $day;if ($day_diff <= 0 && $month_diff <= 0)$year_diff--;return $year_diff;}
+<?
 include('config.php');
 $id=$_GET['id'];
 if($id==''){$id=$who;}
+if($id==$who && $who!=$whod){
+ header("Location:http://nokedo.com/accounts/login.php?c=//class.nokedo.com/profile.php");
+ exit;
+}
+?>
+<!DOCTYPE html><html><head>
+<?
+function age($birthday){
+ list($day,$month,$year) = explode("/",$birthday);
+ $year_diff  = date("Y") - $year;
+ $month_diff = date("m") - $month;
+ $day_diff   = date("d") - $day;
+ if($day_diff < 0 && $month_diff==0){$year_diff--;}
+ if($day_diff < 0 && $month_diff <0){$year_diff--;}
+ return $year_diff;
+}
 $sql=$db->prepare("SELECT * FROM users WHERE id=?");
 $sql->execute(array($id));
 $idt=$sql->rowCount();
-while($r=$sql->fetch()){
- $email=$r['username'];
- $name=$r['name'];
- $birth=$r['birth'];
- $age=age($birth);
- $join=$r['joined'];
- $gender=strtoupper($r['gender']);
- $stat=$r['stat'];
- $t=$name.'\'s profile';
- $json=json_decode($r['json'],true);
- $loc=$json['loc'];
- $ph=$json['ph'];
- $img=$json['img']=='' ? '//cdn.nokedo.com/images/guest.png':$json['img'];
- $wr=$json['wr']=='' ? 'Null':$json['wr'];
- $ds=$json['ds']=='' ? 'Null':$json['ds'];
- $hd=$json['hd']=='' ? '//cdn.nokedo.com/images/header/mountains.jpg':$json['hd'];
- $lang=json_decode($json['lang'],true);
- $pr=$json['privacy'];
- $page=$pr['age'];
- $ploc=$pr['loc'];
- $pphone=$pr['phone'];
- $pmail=$pr['mail'];
- $sd=array();
- if($page=='prt'){$sd['age']='selected';}
- if($ploc=='prt'){$sd['loc']='selected';}
- if($pphone=='prt'){$sd['phone']='selected';}
- if($pmail=='prt'){$sd['mail']='selected';}
+if($idt==0){
+ $sql=$db->prepare("SELECT * FROM users WHERE json LIKE ?");
+ $sql->execute(array('%"username":"'.$id.'"%'));
+ $idt=$sql->rowCount();
 }
-if($idt==0){$er='<h1>No user found</h1>';$t="No user found";}if($id==$who && $who!=$whod){header("Location:http://nokedo.com/accounts/login.php?c=//class.nokedo.com/profile.php");}
+if($idt==1){
+ while($r=$sql->fetch()){
+  $id=$r['id'];
+  $email=$r['username'];
+  $name=$r['name'];
+  $birth=$r['birth'];
+  $age=age($birth);
+  $join=$r['joined'];
+  $gender=strtoupper($r['gender']);
+  $stat=$r['stat'];
+  $t=$name.'\'s profile';
+  $json=json_decode($r['json'],true);
+  $loc=$json['loc'];
+  $ph=$json['ph'];
+  $img=$json['img']=='' ? '//cdn.nokedo.com/images/guest.png':$json['img'];
+  $wr=$json['wr']=='' ? 'Null':$json['wr'];
+  $ds=$json['ds']=='' ? 'Null':$json['ds'];
+  $hd=$json['hd']=='' ? '//cdn.nokedo.com/images/header/mountains.jpg':$json['hd'];
+  $fb=$json['fb']=='' ? 'Null':$json['fb'];
+  $lang=json_decode($json['lang'],true);
+  $pr=$json['privacy'];
+  $page=$pr['age'];
+  $ploc=$pr['loc'];
+  $pphone=$pr['phone'];
+  $pmail=$pr['mail'];
+  $sd=array();
+  if($page=='prt'){$sd['age']='selected';}
+  if($ploc=='prt'){$sd['loc']='selected';}
+  if($pphone=='prt'){$sd['phone']='selected';}
+  if($pmail=='prt'){$sd['mail']='selected';}
+ }
+}
+if($idt==0){
+ ser();
+}
 ?>
+<meta name="rudceid" value="<?echo$id;?>"/>
 <link href="//cdn.nokedo.com/css/all.php" rel="stylesheet">
 <script src="http://cdn.nokedo.com/js/js.php?f=class"></script>
 <title><?echo$t;?></title>
 </head><body>
+<?
+if($who==$id && $jin['username']==""){
+?>
+<div style="position:absolute;background:rgb(100,160,400);padding:10px;text-align:center;z-index:1852;right:0px;left:0px;top:40px;color:white;">
+ Get Your Own Profile Page (http://class.nokedo.com/~YouHere). Submit Your Username <a href='username'>Here</a>
+</div><br/>
+<?
+}
+?>
 <div id="content" style="width:750px;">
-<?if($er!=''){echo$er;exit;}?>
-<div style="display: inline-block;margin-right: 20px;width: 572px;">
-<div style="background: white;height: 175px;position:relative;text-align: center;overflow: hidden;width: 560px;border: 6px solid yellowGreen;"><?if($whod==$id){?><button class="sb sb-b ajax cboxElement" style="display:block;position: absolute;right: -2px;top: -2px;border-left: 1px solid red;border-bottom: 1px solid red;color: white;cursor: pointer;padding-top: 2px;z-index: 1;margin:0px;" href="get.php?hd=1">Change Header Image</button><?}?><img height="175" width="562" id="hdimg" src="<?echo$hd;?>" /><?if($id==$who || empty($lang)==false){?><div style="position: absolute;background: rgba(0, 0, 0, .3);left: 0px;right: 0px;bottom: 0px;color:white;padding: 10px;overflow:hidden;white-space:nowrap;border-top: 1px solid white;" class="langs"><?if(empty($lang) || $lang=='' && $id==$who){echo "<a class='cboxajax' href='get.php?lang' style='color:black;background: white;border:3px dashed #CCC;padding: 3px 8px;display: inline-block;border-radius: 10px;'>Add a language</a>";}else{foreach($lang as $k=>$v){echo"<a style='color:black;background: white;border:3px dashed #CCC;padding: 3px 8px;border-radius: 10px;' class='langknown' href='find.php?lang=$k'>$k</a>&nbsp;&nbsp;";}if($id==$who){echo "<a class='cboxajax' href='get.php?lang' style='color:black;background: white;border:3px dashed #CCC;padding: 3px 8px;border-radius: 10px;'>Add a language</a>";}}?></div><?}?></div><br/>
-<div style="margin:0px auto;display:table;" id="ptabt">
- <button class="sb-b" onclick="$('.ptab').hide();$('#feed').show();$('#ptabt button').removeClass('sb-b');$(this).addClass('sb-b');">Feed</button>
- <button onclick="$('.ptab').hide();$('#about').show();$('#ptabt button').removeClass('sb-b');$(this).addClass('sb-b');">About</button>
- <button onclick="$('.ptab').hide();$('#info').show();$('#ptabt button').removeClass('sb-b');$(this).addClass('sb-b');">Contact</button>
-</div>
+ <?if($er!=''){echo$er;exit;}?>
+ <div style="display: inline-block;margin-right: 20px;width: 572px;">
+ <div style="background: white;height: 175px;position:relative;text-align: center;overflow: hidden;width: 560px;border: 6px solid yellowGreen;"><?if($whod==$id){?><button class="sb sb-b ajax cboxElement" style="display:block;position: absolute;right: -2px;top: -2px;border-left: 1px solid red;border-bottom: 1px solid red;color: white;cursor: pointer;padding-top: 2px;z-index: 1;margin:0px;" href="get.php?hd=1">Change Header Image</button><?}?><img height="175" width="562" id="hdimg" src="<?echo$hd;?>" /><?if($id==$who || empty($lang)==false){?><div style="position: absolute;background: rgba(0, 0, 0, .3);left: 0px;right: 0px;bottom: 0px;color:white;padding: 10px;overflow:hidden;white-space:nowrap;border-top: 1px solid white;" class="langs"><?if(empty($lang) || $lang=='' && $id==$who){echo "<a class='cboxajax' href='get.php?lang' style='color:black;background: white;border:3px dashed #CCC;padding: 3px 8px;display: inline-block;border-radius: 10px;'>Add a language</a>";}else{foreach($lang as $k=>$v){echo"<a style='color:black;background: white;border:3px dashed #CCC;padding: 3px 8px;border-radius: 10px;' class='langknown' href='find.php?lang=$k'>$k</a>&nbsp;&nbsp;";}if($id==$who){echo "<a class='cboxajax' href='get.php?lang' style='color:black;background: white;border:3px dashed #CCC;padding: 3px 8px;border-radius: 10px;'>Add a language</a>";}}?></div><?}?></div><br/>
+ <div style="margin:0px auto;display:table;" id="ptabt">
+  <button class="sb-b" style="width:150px;" onclick="$('.ptab').hide();$('#feed').show();$('#ptabt button').removeClass('sb-b');$(this).addClass('sb-b');">Feed</button>
+  <button style="width:150px;" onclick="$('.ptab').hide();$('#about').show();$('#ptabt button').removeClass('sb-b');$(this).addClass('sb-b');">About</button>
+  <button style="width:150px;" onclick="$('.ptab').hide();$('#cont').show();$('#ptabt button').removeClass('sb-b');$(this).addClass('sb-b');">Contact</button>
+ </div>
  <div id="feed" class='ptab'><br/>
   <?$_GET['awregvawegb']=1;$_POST['user']=$id;include('data.php');?>
   <div id="last_msg_loader" style="text-align: center;color:black;height:30px;background:#EEE;width: 100%;margin-top: 1em;border-radius: 10px;border:2px solid black;"><img title="Loading more Posts.." src="//cdn.nokedo.com/images/load.gif" height="30" /></div>
@@ -91,6 +127,21 @@ if($idt==0){$er='<h1>No user found</h1>';$t="No user found";}if($id==$who && $wh
    <d>Date Of Birth : </d><v><?echo$birth;?></v><select class='pchanger' id='bir' name='privacy'><option value='pub'>Public</option><option <?echo$sd['ge'];?> value='prt'>Private</option></select>
  </div>
 <?}?>
+ </div>
+ <div id='cont' class='ptab' hide>
+  <h2>Contact</h2>
+  <?if($who!=$id){?>
+   <?if($fb!='Null'){?>
+   <div class='icont'>
+    <d>Facebook : </d><v><a target="_blank" href="https://www.facebook.com/<?echo$fb;?>" class="fb_butt"><?echo$fb;?></a></v>
+   </div>
+   <?}?>
+  <?}?>
+  <?if($who==$id){?>
+   <div class='icont'>
+    <d>Facebook : </d><v><a target="_blank" href="https://www.facebook.com/<?echo$fb;?>" class="fb_butt"><?echo$fb;?></a></v><button alt="What's Your FB Username ?" id="fb" class="sb-g edit">EDIT</button>
+   </div>
+  <?}?>
  </div>
 </div>
 <div style="vertical-align: top;display: inline-block;"><div style="position:relative;"><img style="display:block;margin: 0px auto;" width="150" height="150" src="<?echo$img;?>"><?if($who!=$id){$sql=$db->prepare("SELECT * FROM fds WHERE fid=? and uid=? LIMIT 0,30");$sql->execute(array($id,$who));$matches=$sql->rowCount();if ($matches==0){if($who!=$whod){?><a href="//nokedo.com/accounts/login.php?c=//class.nokedo.com/profile.php?id=<?echo$id?>"><?}?><button style="display:block;position: absolute;top: -2px;left:0px;cursor: pointer;padding-top: 2px;z-index: 1;right:0px;margin: 2px;width: 98%;" id="<?echo$id;?>" class="sb sb-g follow">Follow</button><?if($who!=$whod){?></a><?}}else{?><button style="display:block;position: absolute;top: -2px;border-left: 1px solid red;border-bottom: 1px solid red;color: white;cursor: pointer;padding-top: 2px;z-index: 1;left:2px;margin:0px;width: initial;right: 2px;width: 98%;" class="sb sb-red unfollow" id="<?echo$id;?>">Unfollow</button></div><?}}else{?><button style="display:block;position: absolute;top: -2px;margin: 2px;cursor: pointer;padding-top: 2px;z-index: 1;right:0px;left:0px;width: 98%;" class="sb sb-b cboxframe" width="400" height="200" href="http://cdn.nokedo.com/pic.php">Edit Picture</button><?}?><div clear></div>

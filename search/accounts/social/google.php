@@ -1,6 +1,6 @@
 <?session_start();include('../../config.php');
 if($_GET['continue']==null){$continue="http://nokedo.com";}else{$continue=$_GET['continue'];}
-function encryptCookie($value){
+function encrypter($value){
    if(!$value){return false;}
    $key = 'gbfre8*^&%$#%^@(t0+_3a=t[tg;emj';
    $text = $value;
@@ -21,7 +21,7 @@ $em=mysql_query("SELECT * FROM members WHERE username=\"".mysql_real_escape_stri
 while($r=mysql_fetch_array($em)){$id=$r['id'];}$myusername=$id;
 mysql_query("UPDATE members SET status='on' WHERE `id`='".mysql_real_escape_string($myusername)."'") or die(mysql_error());
 setcookie("curuser", $myusername, time()+301014600, "/", "nokedo.com");
-setcookie("wervsi", encryptCookie($myusername), time()+301014600, "/", "nokedo.com");
+setcookie("wervsi", encrypter($myusername), time()+301014600, "/", "nokedo.com");
 header("Location:".$_SESSION['return']."");
 }
 if($_GET['code']==''){$_SESSION['return']=$continue;header("Location: https://accounts.google.com/o/oauth2/auth?redirect_uri=http%3A%2F%2Fnokedo.com/accounts%2Fsocial%2Fgoogle.php&response_type=code&client_id=1002983817000.apps.googleusercontent.com&approval_prompt=force&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&access_type=offline");}else{
@@ -41,7 +41,7 @@ if (mysql_num_rows($em)==1) {
 while($r=mysql_fetch_array($em)){$id=$r['id'];}$myusername=$id;
 mysql_query("UPDATE members SET status='on' WHERE `id`='".mysql_real_escape_string($myusername)."'") or die(mysql_error());
 setcookie("curuser", $myusername, time()+301014600, "/", "nokedo.com");
-setcookie("wervsi", encryptCookie($myusername), time()+301014600, "/", "nokedo.com");
+setcookie("wervsi", encrypter($myusername), time()+301014600, "/", "nokedo.com");
 header("Location:".$_SESSION['return']."");
 }else{
 $lin=file_get_contents('https://www.googleapis.com/plus/v1/people/me?access_token='.$at);$lin=json_decode($lin,true);

@@ -1,14 +1,13 @@
-localStorage['whty']="";
-tmp();
 $('.postform #privacy button:first').addClass('sb-b');
 $("#switcher td button").on('click',function(){
  $(".postform .form").css('background',$(this).css('background-color'));
  localStorage['ps']=$(this).text().slice(0,3).toLowerCase();
 });
 $(".postform").die('submit').on('submit',function(){
+ shown({message:"Posting......",type:"info"});
  $('.postform').find(':input:not(:disabled)').prop('disabled',true);
  if($(this).find("#upimg").val()==''){
-  var json={type:localStorage['ps'],text:$(this).find('#text').val(),pr:$(this).find("#pr").val(),imgs:''};
+  var json={text:$(this).find('#text').val(),pr:$(this).find("#pr").val(),imgs:''};
   $.post('http://class.nokedo.com/post.php',json,function(data){
    if($("#feed .post:first").length!=0){
     $("#feed .post:first").before(data);
@@ -17,15 +16,15 @@ $(".postform").die('submit').on('submit',function(){
    }
    $('.postform')[0].reset();
    $('.postform').find(':input:disabled').prop('disabled',false);
+   shown({message:"Posted Successfully"});
   }).error(function(){
-   shown({message:"Posting failed",type:"error"});
+   shown({message:"Posting Failed",type:"error"});
    $('.postform').find(':input:disabled').prop('disabled',false);
   });
  }else{
   var data = new FormData();
   data.append('img',$("#upimg")[0].files[0]);
   data.append('text',$(this).find('#text').val());
-  data.append('type',localStorage['ps']);
   data.append('pr',$(this).find("#pr").val());data.append('imgs','1');
   $.ajax({
    url: 'http://class.nokedo.com/post.php',
@@ -35,10 +34,13 @@ $(".postform").die('submit').on('submit',function(){
    processData: false,
    type: 'POST',
    success: function(data){
-    $("#feed .post:first").before(data);$('.postform')[0].reset();$('.postform').find(':input:disabled').prop('disabled',false);
+    $("#feed .post:first").before(data);
+    $('.postform')[0].reset();
+    $('.postform').find(':input:disabled').prop('disabled',false);
+    shown({message:"Posted Successfully"});
    }
   }).error(function(){
-   shown({message:"Posting failed",type:"error"});
+   shown({message:"Posting Failed.",type:"error"});
    $('.postform')[0].reset();$('.postform').find(':input:disabled').prop('disabled',false);
   });
  }
@@ -49,15 +51,6 @@ $('.postform #privacy button').on('click',function(){
  $(this).addClass('sb-b');
  $('.postform #privacy').hide();
  $("#pr").val($(this).attr('value'));
-});
-$('#tgfeed button').live('click',function(){
- $("#feed").tload();
- localStorage['whty']=$(this).text().slice(0,3).toLowerCase();
- $(".postform .form").css('background',$(this).css('background-color'));
- localStorage['ps']=$(this).text().slice(0,3).toLowerCase();
- $.post('http://class.nokedo.com/data.php',{data:"1",type:$(this).text().slice(0,3).toLowerCase()},function(data){
-  $("#feed").html(data);
- });
 });
 $('.cont .postimg').livequery('click',function(event){
  event.preventDefault();
@@ -70,18 +63,17 @@ $('.cont .postimg').livequery('click',function(event){
 });
 function last_msg_funtion(){
  var ID=$(".post:last").attr("id");
- if(window.location.href.split('id=')[1]==undefined){
+ if(window.location.pathname.match("~")){
+  var aer=$("meta[name=rudceid]").attr("value");
+ }else if(window.location.href.split('id=')[1]==undefined){
   var aer=info['uid'];
  }else{
   var aer=window.location.href.split('id=')[1];
  }
- if(window.location.pathname=="/profile.php"){
+ if(window.location.pathname=="/profile.php" || window.location.pathname.match("~")!=null){
   var dlink={uid:aer,ex:ID,data:1};
  }else{
   var dlink={ex:ID,data:1};
- }
- if(localStorage['whty']!=''){
-  dlink['type']=localStorage['whty'];
  }
  $.post('http://class.nokedo.com/data.php',dlink,function(data){
   if(data.match(/moptb/gi)!=null) {

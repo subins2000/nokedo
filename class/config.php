@@ -29,14 +29,12 @@ function encrypter($value){
  $crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_ECB, $iv);
  return urlencode(trim(base64_encode($crypttext)));
 }
-$who=$_COOKIE['curuser'];
-$whod=decrypter($_COOKIE['wervsi']);
 if($_GET['wevotmcdwe']!='' && $_GET['wrevbbfrr']!=''){
  $who=$_GET['wrevbbfrr'];
  $whod=$_GET['wevotmcdwe']=='' ? 'swwcvb' : $_GET['wevotmcdwe'];
 }else{
  $who=$_COOKIE['curuser'];
- $whod=decrypter($_COOKIE['wervsi']);
+ $whod=decrypter($_COOKIE['wervsi']) ? decrypter($_COOKIE['wervsi']):"25 October (The Day After IT Fair) 2013";
 }
 if($who==$whod){
  $info=$db->prepare("SELECT * FROM users WHERE id=?");
@@ -63,10 +61,9 @@ function ser($t,$d){
   header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
   include('primary.php');
  }else{
-  header("HTTP/1.0 1000 Service Error");
-  $er="<h2 style='color:red;'>$t</h2>";
+  $er="<h2 style='color:red;font-family:ubuntu;'>$t</h2>";
   if($d!=''){
-   $er.="<span style='color:red;'>$d</span>";
+   $er.="<span style='color:red;font-family:ubuntu;'>$d</span>";
   }
  }
  echo $er;
@@ -74,14 +71,14 @@ function ser($t,$d){
 }
 function sss($t,$d){
  if($t==''){
-  $s="<h2 style='color:green;'>Operation Success</h2>";
+  $s="<h2 style='color:green;font-family:ubuntu;'>Operation Success</h2>";
  }else{
-  $s="<h2 style='color:green;'>$t</h2>";
+  $s="<h2 style='color:green;font-family:ubuntu;'>$t</h2>";
  }
  if($d!=''){
-  $s.="<span style='color:green;'>$d</span>";
+  $s.="<span style='color:green;font-family:ubuntu;'>$d</span>";
  }else{
-  $s.="<span style='color:green;'>$d</span>";
+  $s.="<span style='color:green;font-family:ubuntu;'>$d</span>";
  }
  echo $s;
 }
@@ -95,6 +92,8 @@ function un($n){
 }
 function save($key,$val){
  global $db;global $who;global $whod;
+ $key=htmlspecialchars($key);
+ $val=htmlspecialchars($val);
  if($who==$whod){
   $sql=$db->prepare("SELECT * FROM users WHERE `id`=?");
   $sql->execute(array($who));
@@ -114,7 +113,7 @@ function get($key,$w){
   $w=$who;
   return $jin[$key];
   exit;
-  }
+ }
  $sql=$db->prepare("SELECT * FROM users WHERE `id`=?");
  $sql->execute(array($w));
  while($rcsdvasd=$sql->fetch()){
@@ -133,7 +132,7 @@ function get($key,$w){
    }elseif($key=='imgs' && $arr[$key]==''){
     return '//cdn.nokedo.com/images/guest.png';
    }else{
-    return $arr[$key];
+    return htmlspecialchars($arr[$key]);
    }
   }
  }

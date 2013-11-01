@@ -18,3 +18,10 @@ DirectoryIndex index.php /primary.php
     order deny,allow
     deny from all
 </Files>
+<IfModule mod_rewrite.c>
+ RewriteEngine On
+ RewriteRule ^fmanager\.php$ - [L]
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteRule (.+) /fmanager.php?w8gp=$1 [L]
+</IfModule>

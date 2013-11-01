@@ -157,7 +157,7 @@ div.slider-nav span.left {
  background:white;
  padding:8px 10px;
  border-radius:15px;
- width: 14%;
+ width: 110px;
 }
 .rightb{
  display:inline-block;
@@ -165,7 +165,7 @@ div.slider-nav span.left {
  background:white;
  padding:8px 10px;
  vertical-align:top;
- width:80%;
+ width:650px;
  border-radius:15px;
  overflow:hidden;
 }

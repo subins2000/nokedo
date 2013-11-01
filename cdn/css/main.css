@@ -1,10 +1,10 @@
 body{
  font-family:"Ubuntu";
  background-color:#93dc58;
- margin: 0px;
+
  padding: 0px;
  border: 0px;
- line-height: 18px;
+ line-height: 22px;
 }
 #content{
  margin: 0% auto 1% auto;
@@ -144,31 +144,6 @@ a:visited{
 }
 [hide],[hidden]{
  display:none;
-}
-/*Scroll Bars*/
-::-webkit-scrollbar-thumb{
- background-color: rgba(0, 0, 0, .2);
- background-clip: padding-box;
- border: solid transparent;
- min-height: 28px;
- padding: 100px 0 0;
- box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1),inset 0 -1px 0 rgba(0, 0, 0, .07);
-}
-::-webkit-scrollbar-thumb:hover{
- background-color: rgba(0, 0, 0, .5);
-}
-::-webkit-scrollbar{
- width: 15px;
- border-width: 0 1px 0 2px;
-}
-::-webkit-scrollbar-track{
- background-clip: padding-box;
- border: solid transparent;
- border-width: 0 0 0 4px;
- border-width: 0;
-}
-::-webkit-scrollbar-corner {
- background: transparent;
 }
 /*Appearcance*/
 blockquote{
@@ -341,7 +316,7 @@ textarea{
  font-family: 'Ubuntu', sans-serif;
  font-size: 18px;
  font-weight: 400;
- color: #fff;
+ color: #fff !important;
  line-height: 41px;
  background: #3b579d url(//cdn.nokedo.com/images/fb_icon.png) no-repeat 14px 8px scroll;
  -webkit-border-radius: 4px;
